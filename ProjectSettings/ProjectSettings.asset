@@ -529,7 +529,13 @@ PlayerSettings:
     Purchasing: 0
     UNet: 1
     Unity_Ads: 0
+<<<<<<< HEAD
   cloudProjectId: b34f321a-7705-464d-9092-5b6f8ef622b1
   projectName: CS321 Project (1)
   organizationId: ericus20
+=======
+  cloudProjectId: 964b91f2-09b0-4c43-b93a-b542732f8143
+  projectName: CS321 Project
+  organizationId: lesexoflex
+>>>>>>> testing sprite animations
   cloudEnabled: 0
