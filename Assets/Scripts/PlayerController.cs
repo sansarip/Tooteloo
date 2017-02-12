@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
 	public float speed;
 	public int health;
 	private Animator animator;
+    private Rigidbody2D rigidBody2D;
 	private float timewalking;
     private float timeLimit;
     private UserInput userInput;
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		animator = this.GetComponent<Animator> ();
+        rigidBody2D = this.GetComponent<Rigidbody2D>();
         userInput = new UserInput();
 		timewalking = 0;
         timeLimit = 2.0f;
@@ -21,23 +23,30 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         userInput.checkInputKey();
-        bool comboMatch = userInput.compareAndReset();
-		if (comboMatch) {
+        UserInput.ActionName comboMatch = userInput.compareAndReset();
+		if (comboMatch == UserInput.ActionName.Walk) {
 			animator.SetBool ("Walk", true);
-			GetComponent<Rigidbody2D> ().velocity = new Vector2 (speed, 0);
-		}
+            float y = rigidBody2D.velocity[1];
+            rigidBody2D.velocity = new Vector2 (speed, y);
+		} else if (comboMatch == UserInput.ActionName.Jump)
+        {
+            float x = rigidBody2D.velocity[0];
+            rigidBody2D.velocity = new Vector2(x, speed*4);
+        }
 		if (animator.GetBool ("Walk") && timewalking < timeLimit) {
 			timewalking += Time.deltaTime;
 			Debug.Log ("Timewalking: " + timewalking + "\n");
 		} else if (timewalking >= timeLimit) {
 			animator.SetBool ("Walk", false);
 			timewalking = 0;
-			GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, 0);
+            float y = rigidBody2D.velocity[1];
+			GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, y);
 		}
 	}
 
     public class UserInput
     {
+        public enum ActionName { None, Walk, Attack, Jump, Block };
         private char[] keyList;
         private int keyListPosition;
         private string[] comboList;
@@ -134,24 +143,40 @@ public class PlayerController : MonoBehaviour {
         }
 
 
-        public bool compareAndReset()
+        public ActionName compareAndReset()
         {
-            bool returnBool = false;
+            ActionName returnAction = ActionName.None;
             if ( keyListPosition == comboLength )
             {
                 for (int i = 0; i < comboList.Length; i++)
                 {
                     if (compareEquals(keyList, comboList[i]))
                     {
+                        switch (i)
+                        {
+                            case 0:
+                                returnAction = ActionName.Walk;
+                                break;
+                            case 1:
+                                returnAction = ActionName.Attack;
+                                break;
+                            case 2:
+                                returnAction = ActionName.Jump;
+                                break;
+                            case 3:
+                                returnAction = ActionName.Block;
+                                break;
+                            default:
+                                break;
+                        }
                         resetKeyListPos();
                         resetKeyList();
-                        returnBool = true;
                     }
                 }
                 resetKeyListPos();
                 resetKeyList();
             }
-            return returnBool;
+            return returnAction;
         }
     }
 
