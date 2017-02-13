@@ -27,7 +27,6 @@ public class UserInput
 		keyList = new char[numCombos];
 		keyListPosition = 0;
 		comboList = generateComboList ();
-		Debug.Log ("STRINGARRAY: " + comboList [0] + "\n");
 		comboLength = 4;
 	}
 
