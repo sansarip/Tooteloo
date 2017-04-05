@@ -25,6 +25,11 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		commandUnits (userInput);
+	}
+
+	void commandUnits (UserInput userInput)
+	{
 		userInput.checkInputKey ();
 		UserInput.ActionName comboMatch = userInput.compareAndReset ();
 		if (comboMatch == UserInput.ActionName.Walk) {
@@ -45,7 +50,6 @@ public class PlayerController : MonoBehaviour
 			GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, y);
 		}
 	}
-
 
 
 }
