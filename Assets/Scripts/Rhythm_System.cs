@@ -1,54 +1,38 @@
-﻿using System;
-using System.Timers;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Rhythm_System
+
+public class ExampleScript : MonoBehaviour
 {
-	private static System.Timers.Timer aTimer;
-	static int beat = 0;
-	static Boolean accepted = true;
+	
+	//divides the beats so to set the buffer for acceptance.
+	//Can  be changed to numbers divisible by 4 to increase or decrease 
+	//the length of the buffer.
+	int division = 8;
+	int count = 0;
+	bool accept = false;
 
-	public static void Main()
+	public Rigidbody projectile;
+
+	void Start()
 	{
-		SetTimer();
-
-		Console.ReadLine();
-		aTimer.Stop();
-		aTimer.Dispose();
-
-		Console.WriteLine("Terminating the application...");
+		//0.5 is 120 beats per minute
+		InvokeRepeating("getInput", 0f, 0.5f/division);
 	}
 
-	private static void SetTimer()
+	void getInput()
 	{
-		//divides 120 beats into eighths to have the buffer
-		aTimer = new System.Timers.Timer(125/2);
-		// Hook up the Elapsed event for the timer. 
-		aTimer.Elapsed += OnTimedEvent;
-		aTimer.AutoReset = true;
-		aTimer.Enabled = true;
-	}
+		count++;
 
-	//where all the actual action happens
-	private static void OnTimedEvent(Object source, ElapsedEventArgs e)
-	{
-		if (beat == 7) {
-			accepted = true;
-		}
-		if (beat == 8) {
-			beat = 0;
-		}
-		if (beat == 2) {
-			accepted = false;
+		//start of buffer time
+		if (count == division - 1) {
+			accept = true;
 		}
 
-		//just as a visual for how the time works
-		if (accepted) {
-			Console.WriteLine ("double yay");
-		} else {
-			Console.WriteLine ("no yay");
+		//resets after buffer time has passed
+		if (count > division) {
+			count = 1;
+			accept = false;
 		}
-
-		beat++;
 	}
 }
