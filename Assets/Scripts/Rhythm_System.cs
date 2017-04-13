@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 
 
-public class ExampleScript : MonoBehaviour
+public class Rhythm_System : MonoBehaviour
 {
 	
 	//divides the beats so to set the buffer for acceptance.
 	//Can  be changed to numbers divisible by 4 to increase or decrease 
 	//the length of the buffer.
-	int division = 8;
+	int division = 4;
 	int count = 0;
-	bool accept = false;
+	public static bool accept = false;
 
 	public Rigidbody projectile;
 
@@ -23,7 +23,6 @@ public class ExampleScript : MonoBehaviour
 	void getInput()
 	{
 		count++;
-
 		//start of buffer time
 		if (count == division - 1) {
 			accept = true;

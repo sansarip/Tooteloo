@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Created by Sepehr Ansaripour
+ * UserInput is designed to receive and verify user input keys
+ * It should return an appropriate enum ActionName according to the user input
+ */
 public class UserInput
 {
 	public enum ActionName
@@ -14,11 +19,11 @@ public class UserInput
 
 	;
 
-	private char[] keyList;
+	private char[] keyList; 		// holds user input
 	private int keyListPosition;
-	private string[] comboList;
-	private int numCombos;
-	private int comboLength;
+	private string[] comboList;		// holds combos as strings
+	private int numCombos;			// size of comboList
+	private int comboLength;		// length of each combo string
 
 	// constructor
 	public UserInput ()
@@ -63,29 +68,39 @@ public class UserInput
 	public bool checkInputKey ()
 	{
 		if (Input.GetKeyUp ("q")) {
+			Debug.Log ("Q");
 			int index = keyListPosition;
 			keyList [index] = 'q';
 			keyListPosition++;
 			return true;
 		} else if (Input.GetKeyUp ("w")) {
+			Debug.Log ("W");
 			int index = keyListPosition;
 			keyList [index] = 'w';
 			keyListPosition++;
 			return true;
 		} else if (Input.GetKeyUp ("e")) {
+			Debug.Log ("E");
 			int index = keyListPosition;
 			keyList [index] = 'e';
 			keyListPosition++;
 			return true;
 		} else if (Input.GetKeyUp ("r")) {
+			Debug.Log ("R");
 			int index = keyListPosition;
 			keyList [index] = 'r';
 			keyListPosition++;
 			return true;
+		} else if (Input.anyKey) {
+			//resetKeyList ();
 		}
 		return false;
 	}
 
+	/*
+	 * compareEquals compares a char array with a string
+	 * returns true if equal, else false
+	 */
 	private bool compareEquals (char[] charray1, string charray2)
 	{
 		int size = 0;
@@ -104,7 +119,7 @@ public class UserInput
 	public ActionName compareAndReset ()
 	{
 		ActionName returnAction = ActionName.None;
-		if (keyListPosition == comboLength) {
+		if (keyListPosition >= comboLength) { // if key list is fully populated
 			for (int i = 0; i < comboList.Length; i++) {
 				if (compareEquals (keyList, comboList [i])) {
 					switch (i) {
@@ -131,5 +146,10 @@ public class UserInput
 			resetKeyList ();
 		}
 		return returnAction;
+	}
+
+	public void reset() {
+		resetKeyListPos ();
+		resetKeyList ();
 	}
 }
