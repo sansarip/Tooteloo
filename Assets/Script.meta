@@ -1,5 +1,6 @@
 fileFormatVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD:Assets/Scripts.meta
 guid: 4fd578a498e816845aed0b8058b7853f
 folderAsset: yes
 timeCreated: 1486082957
@@ -8,6 +9,16 @@ guid: 1700a2bd1325c764d9d8b5d9e176e92f
 folderAsset: yes
 timeCreated: 1486080793
 >>>>>>> a08996c0d8a27da717a72bb66a7aa42b18379fd9
+=======
+guid: 1700a2bd1325c764d9d8b5d9e176e92f
+folderAsset: yes
+timeCreated: 1486080793
+=======
+guid: 4fd578a498e816845aed0b8058b7853f
+folderAsset: yes
+timeCreated: 1486082957
+>>>>>>> 372d42d0755e62d8a1a853b89ea9dcebcd3faf91
+>>>>>>> a04c895a864eeeae78a071e3f48c2c50eb090f18:Assets/Script.meta
 licenseType: Free
 DefaultImporter:
   userData: 
