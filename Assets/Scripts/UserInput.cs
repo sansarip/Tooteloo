@@ -45,6 +45,11 @@ public class UserInput
 		return comboList;
 	}
 
+	public char[] getKeyList()
+	{
+		return keyList;
+	}
+
 	private string[] generateComboList ()
 	{
 		return new string[4] { "qwer", "qqwr", "qwqw", "were" };
@@ -115,6 +120,37 @@ public class UserInput
 		return true;
 	}
 
+	public ActionName compare()
+	{
+		ActionName returnAction = ActionName.None;
+		if (keyListPosition >= comboLength) { // if key list is fully populated
+			for (int i = 0; i < comboList.Length; i++) { // iterate through combos
+				if (compareEquals (keyList, comboList [i])) {
+					switch (i) {
+					case 0:
+						returnAction = ActionName.Walk;
+						break;
+					case 1:
+						returnAction = ActionName.Attack;
+						break;
+					case 2:
+						returnAction = ActionName.Jump;
+						break;
+					case 3:
+						returnAction = ActionName.Block;
+						break;
+					default:
+						break;
+					}
+					resetKeyListPos ();
+					resetKeyList ();
+				}
+			}
+			resetKeyListPos ();
+			resetKeyList ();
+		}
+		return returnAction;
+	}
 
 	public ActionName compareAndReset ()
 	{

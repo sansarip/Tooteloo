@@ -1,20 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
-
 	public Transform[] spawnPoints;
 	public GameObject player;
 	public static Vector3 averagePosition;
 	public int numUnits;
 	private GameObject[] playerUnitArray;
+	private string defaultKeyText;
 
 	// Use this for initialization
 	void Start ()
 	{
 		playerUnitArray = new GameObject[numUnits];
+		defaultKeyText = "Combo: ";
 		for (int i = 0; i < spawnPoints.Length; i++) {
 			playerUnitArray [i] = (GameObject)Instantiate (player, spawnPoints [i].position, spawnPoints [i].rotation);
 		}
@@ -47,4 +49,5 @@ public class PlayerManager : MonoBehaviour
 		z /= length;
 		return new Vector3 (x, y, z);
 	}
+		
 }
