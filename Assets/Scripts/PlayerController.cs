@@ -14,16 +14,19 @@ public class PlayerController : MonoBehaviour
 	private UserInput.ActionName comboMatch;
 	private string defaultKeyText;
 	private float timeWalk;
+	private float timeDisplay;
 	private float timeNoInput;
 	private float timeNoInpLimit;
 	private float timeWalkLimit;
 	private bool inputTimerStarted;
+	private bool displayingCombo;
 
 	// Use this for initialization
 	void Start ()
 	{
+		displayingCombo = false;
 		comboMatch = UserInput.ActionName.None;
-		keyText = (Text) GameObject.Find ("KeyText").GetComponent<Text>();
+		keyText = (Text)GameObject.Find ("KeyText").GetComponent<Text> ();
 		defaultKeyText = "Combo: ";
 		keyText.text = defaultKeyText;
 		animator = this.GetComponent<Animator> ();
@@ -33,6 +36,7 @@ public class PlayerController : MonoBehaviour
 		timeNoInput = 0;
 		timeNoInpLimit = 0.7f;
 		timeWalkLimit = 2.0f;
+		timeDisplay = 0;
 		inputTimerStarted = false;
 	}
  
@@ -42,7 +46,6 @@ public class PlayerController : MonoBehaviour
 		commandUnits ();
 		checkState ();
 		displayKeyList ();
-		//TODO: fix fourth combo letter not showing
 		Debug.Log (Rhythm_System.accept);
 	}
 
@@ -59,10 +62,15 @@ public class PlayerController : MonoBehaviour
 			}
 		} 
 
-		incrTimer (inputTimerStarted, userInput); // increment timer once input is accepted
+		incrTimer (inputTimerStarted, userInput); 		// increment timer once input is accepted
 
-		if (inputBool) { // if acceptable input entered
-			comboMatch = userInput.compareAndReset();
+		if (inputBool) { 					// if acceptable input entered
+			comboMatch = userInput.compare ();		// check if macthes combo
+			if (comboMatch != UserInput.ActionName.None) { 	// display last element in keyList
+				displayKeyList (); 			// display current keyList
+				timeDisplay = 2*timeNoInpLimit;
+				userInput.reset (); 			// reset keyList
+			}
 			if (comboMatch == UserInput.ActionName.Walk) {
 				animator.SetBool ("Walk", true);
 				float y = rigidBody2D.velocity [1];
@@ -75,7 +83,8 @@ public class PlayerController : MonoBehaviour
 			
 	}
 
-	void checkState() {
+	void checkState ()
+	{
 		if (animator.GetBool ("Walk") && timeWalk < timeWalkLimit) {
 			timeWalk += Time.deltaTime;
 			//Debug.Log ("Timewalking: " + timeWalk + "\n");
@@ -87,7 +96,8 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	bool incrTimer(bool started, UserInput input) {
+	bool incrTimer (bool started, UserInput input)
+	{
 		if (started) {
 			timeNoInput += Time.deltaTime;
 		} else {
@@ -97,25 +107,33 @@ public class PlayerController : MonoBehaviour
 		if (timeNoInput > timeNoInpLimit) {
 			timeNoInput = 0;
 			input.reset ();
+			inputTimerStarted = false;
 			Debug.Log ("RESET");
 			return false;
 		}
 		return true;
 	}
 
-	void displayKeyList() {
-		char[] keyList = userInput.getKeyList ();
-		string s = Utility.toString (keyList);
-		s = s.ToUpper ();
-		Debug.Log ("length: " + s.Length.ToString() + " s: " + s);
-		if (s.Length != 0) {
-			setKeyText (defaultKeyText + s);
-		} else {
-			setKeyText (defaultKeyText);
+	void displayKeyList ()
+	{
+		if (timeDisplay > timeNoInpLimit) { // keep current text display
+			timeDisplay -= Time.deltaTime; 
+		} else { // change text display
+			char[] keyList = userInput.getKeyList ();
+			string s = Utility.toString (keyList);
+			s = s.ToUpper ();
+			Debug.Log ("length: " + s.Length.ToString () + " s: " + s);
+			if (s.Length != 0) {
+				setKeyText (defaultKeyText + s);
+			} else {
+				setKeyText (defaultKeyText);
+			}
+			timeDisplay = 0;
 		}
 	}
 
-	void setKeyText (string text) {
+	void setKeyText (string text)
+	{
 		keyText.text = text;
 	}
 }

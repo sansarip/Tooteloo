@@ -142,12 +142,8 @@ public class UserInput
 					default:
 						break;
 					}
-					resetKeyListPos ();
-					resetKeyList ();
 				}
 			}
-			resetKeyListPos ();
-			resetKeyList ();
 		}
 		return returnAction;
 	}
@@ -174,8 +170,6 @@ public class UserInput
 					default:
 						break;
 					}
-					resetKeyListPos ();
-					resetKeyList ();
 				}
 			}
 			resetKeyListPos ();
