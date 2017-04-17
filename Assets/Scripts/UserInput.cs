@@ -52,7 +52,7 @@ public class UserInput
 
 	private string[] generateComboList ()
 	{
-		return new string[4] { "qwer", "qqwr", "qwqw", "were" };
+		return new string[4] { "qwer", "qqqq", "qwqw", "were" };
 	}
 
 	private void resetComboList ()

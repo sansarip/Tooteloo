@@ -9,13 +9,11 @@ public class PlayerManager : MonoBehaviour
 	public static Vector3 averagePosition;
 	public int numUnits;
 	private GameObject[] playerUnitArray;
-	private string defaultKeyText;
 
 	// Use this for initialization
 	void Start ()
 	{
 		playerUnitArray = new GameObject[numUnits];
-		defaultKeyText = "Combo: ";
 		for (int i = 0; i < spawnPoints.Length; i++) {
 			playerUnitArray [i] = (GameObject)Instantiate (player, spawnPoints [i].position, spawnPoints [i].rotation);
 		}

@@ -2,17 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour {
-
-	//private AudioSource audioSource;
+public class EnemyController : MonoBehaviour {
+	public int health;
 
 	// Use this for initialization
 	void Start () {
-		//audioSource = (AudioSource) GetComponent<AudioSource>();
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		checkState ();
+	}
+
+	bool checkState() {
+		if (health <= 0) {
+			Destroy (this.gameObject);
+		}
+		return true;
 	}
 }

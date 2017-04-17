@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: lil_guy_sprite_sheet_0
+  m_Name: player_unit_controller
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Walk
@@ -81,7 +81,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: lil_guy_walk
+  m_Name: walk
   m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions:
@@ -105,8 +105,8 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: lil_guy_idle
-  m_Speed: 0.5
+  m_Name: idle
+  m_Speed: 0.35
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101994779012547000}

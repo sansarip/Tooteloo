@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+	public GameObject weapon;
 	public float speed;
+	public float range;
 	public int health;
 	private Animator animator;
 	private Rigidbody2D rigidBody2D;
@@ -19,12 +21,10 @@ public class PlayerController : MonoBehaviour
 	private float timeNoInpLimit;
 	private float timeWalkLimit;
 	private bool inputTimerStarted;
-	private bool displayingCombo;
 
 	// Use this for initialization
 	void Start ()
 	{
-		displayingCombo = false;
 		comboMatch = UserInput.ActionName.None;
 		keyText = (Text)GameObject.Find ("KeyText").GetComponent<Text> ();
 		defaultKeyText = "Combo: ";
@@ -71,13 +71,26 @@ public class PlayerController : MonoBehaviour
 				timeDisplay = 2*timeNoInpLimit;
 				userInput.reset (); 			// reset keyList
 			}
-			if (comboMatch == UserInput.ActionName.Walk) {
+			switch (comboMatch) {
+			case UserInput.ActionName.Walk:
 				animator.SetBool ("Walk", true);
 				float y = rigidBody2D.velocity [1];
 				rigidBody2D.velocity = new Vector2 (speed, y);
-			} else if (comboMatch == UserInput.ActionName.Jump) {
+				break;
+			case UserInput.ActionName.Jump:
 				float x = rigidBody2D.velocity [0];
 				rigidBody2D.velocity = new Vector2 (x, speed * 4);
+				break;
+			case UserInput.ActionName.Attack:
+				Vector2 position = rigidBody2D.position;
+				Vector2 target = rigidBody2D.position + new Vector2 (range, 0);
+				Vector2 trajectory = Utility.ballisticVel (position, target, 30.0f);
+				Vector2 offset = position + new Vector2 (0, 2.0f);
+				GameObject wep = (GameObject) Instantiate (weapon, offset, Quaternion.identity);
+				wep.GetComponent<Rigidbody2D> ().velocity = trajectory;
+				break;
+			default:
+				break;
 			}
 		}
 			
