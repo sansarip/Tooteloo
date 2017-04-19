@@ -174,7 +174,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Game
+          m_StringArgument: Level1
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -465,7 +465,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Welcome To Sansarip Game
+  m_Text: Welcome To Tootleoo Game
 --- !u!222 &1017622227
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -512,6 +512,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bab76ca33ea344458768e3e49d663c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  soundsMenu: {fileID: 0}
+  controlsMenu: {fileID: 0}
 --- !u!1 &1712749177
 GameObject:
   m_ObjectHideFlags: 0
