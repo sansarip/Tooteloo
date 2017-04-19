@@ -9,7 +9,7 @@ public class Rhythm_System : MonoBehaviour
 	//Can  be changed to numbers divisible by 4 to increase or decrease 
 	//the length of the buffer.
 	public Transform clockPos;
-	int division = 8;
+	int division = 16;
 	int count = 0;
 	public static bool accept = false;
 	public Rigidbody projectile;
@@ -25,10 +25,10 @@ public class Rhythm_System : MonoBehaviour
 	{
 		count++;
 		//start of buffer time
-		if (count == division - 3) {
+		if (count == division - 5) {
 			accept = true;
 		}
-		if (count == 3) {
+		if (count == 5) {
 			accept = false;
 		}
 
