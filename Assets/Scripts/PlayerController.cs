@@ -82,12 +82,16 @@ public class PlayerController : MonoBehaviour
 				rigidBody2D.velocity = new Vector2 (x, speed * 4);
 				break;
 			case UserInput.ActionName.Attack:
-				Vector2 position = rigidBody2D.position;
-				Vector2 target = rigidBody2D.position + new Vector2 (range, 0);
-				Vector2 trajectory = Utility.ballisticVel (position, target, 30.0f);
+				Vector2 position = transform.position;
+				Vector2 target = position + new Vector2 (range, 0);
+				Vector2 trajectory = Utility.ballisticVel (position, target, 55.0f);
 				Vector2 offset = position + new Vector2 (0, 2.0f);
-				GameObject wep = (GameObject) Instantiate (weapon, offset, Quaternion.identity);
+				Vector2 midPoint2 = (target) / 2;
+				Vector3 midPoint3 = midPoint2;
+				midPoint3.z = 20f;
+				GameObject wep = (GameObject) Instantiate (weapon, offset, Quaternion.AngleAxis(-80.0f, midPoint3));
 				wep.GetComponent<Rigidbody2D> ().velocity = trajectory;
+				wep.GetComponent<Spear> ().invokeRotation (midPoint3);
 				break;
 			default:
 				break;
@@ -98,13 +102,14 @@ public class PlayerController : MonoBehaviour
 
 	void checkState ()
 	{
+		float y = 0;
 		if (animator.GetBool ("Walk") && timeWalk < timeWalkLimit) {
 			timeWalk += Time.deltaTime;
 			//Debug.Log ("Timewalking: " + timeWalk + "\n");
 		} else if (timeWalk >= timeWalkLimit) {
 			animator.SetBool ("Walk", false);
 			timeWalk = 0;
-			float y = rigidBody2D.velocity [1];
+			y = rigidBody2D.velocity [1];
 			GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, y);
 		}
 	}
@@ -135,7 +140,6 @@ public class PlayerController : MonoBehaviour
 			char[] keyList = userInput.getKeyList ();
 			string s = Utility.toString (keyList);
 			s = s.ToUpper ();
-			Debug.Log ("length: " + s.Length.ToString () + " s: " + s);
 			if (s.Length != 0) {
 				setKeyText (defaultKeyText + s);
 			} else {

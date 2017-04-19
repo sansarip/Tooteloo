@@ -24,6 +24,9 @@ public class EnemyManager : MonoBehaviour {
 		//averagePosition = averagePositions (enemyUnitArray);
 	}
 
+	void OnTriggerEnter2D ( Collider2D other ) {
+	
+	}
 	Vector3 averagePositions (GameObject[] goArray)
 	{
 		int length = goArray.Length;

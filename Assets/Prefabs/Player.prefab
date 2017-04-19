@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 61825413318870056}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 1407510588178050, guid: 44bc1152de4d1374e82eb20f7d8d3cdf, type: 2}
-  speed: 1.6
+  speed: 2.5
   range: 12
   health: 10
 --- !u!212 &212744218063224954
