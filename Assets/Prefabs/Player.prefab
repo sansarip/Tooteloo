@@ -58,7 +58,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 0.5
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 0
@@ -106,8 +106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a67eda9599a1bc4793b7d8010236530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shield: {fileID: 1924079743836998, guid: e704d410432a4074eb7aef2894edb9b6, type: 2}
   weapon: {fileID: 1407510588178050, guid: 44bc1152de4d1374e82eb20f7d8d3cdf, type: 2}
-  speed: 2.5
+  speed: 3.5
   range: 12
   health: 10
 --- !u!212 &212744218063224954
@@ -139,8 +140,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1221248181
-  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: a8f5bf2a023c1904b8fd812a91071794, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

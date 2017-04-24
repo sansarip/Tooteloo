@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour {
+	public static int numEnemies;
 	public Transform[] spawnPoints;
 	public GameObject enemy;
 	//public static Vector3 averagePosition;
@@ -13,6 +14,7 @@ public class EnemyManager : MonoBehaviour {
 	void Start ()
 	{
 		enemyUnitArray = new GameObject[numUnits];
+		numEnemies = numUnits;
 		for (int i = 0; i < spawnPoints.Length; i++) {
 			enemyUnitArray [i] = (GameObject)Instantiate (enemy, spawnPoints [i].position, spawnPoints [i].rotation);
 		}
@@ -27,6 +29,7 @@ public class EnemyManager : MonoBehaviour {
 	void OnTriggerEnter2D ( Collider2D other ) {
 	
 	}
+
 	Vector3 averagePositions (GameObject[] goArray)
 	{
 		int length = goArray.Length;

@@ -23,14 +23,11 @@ public class Spear : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D (Collider2D other) {
-		if (!other.isTrigger) {
-			if (other.gameObject.tag.Equals ("Enemy")) {
-				int health = other.GetComponent<EnemyController> ().health;
-				other.GetComponent<EnemyController> ().health = health - damage;
+		if (!other.isTrigger && other.gameObject.tag.Equals ("Enemy")) {
+				other.GetComponent<EnemyController> ().receiveDamage (damage);
 				invoke = false;
 				Destroy (this.gameObject);
 			}
-		}
 	}
 
 	public void rotateAxis() {

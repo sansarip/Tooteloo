@@ -59,7 +59,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -78,7 +78,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 25, y: 4.5}
+  m_Size: {x: 20, y: 4.5}
 --- !u!61 &61780362212678018
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -92,7 +92,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 5.66, y: 4.5}
+  m_Size: {x: 5.65, y: 4.5}
 --- !u!95 &95391022389769458
 Animator:
   serializedVersion: 3
@@ -123,7 +123,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 16
   speed: 2
-  range: 25
+  range: 20
+  damage: 5
 --- !u!212 &212768791907054864
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -154,7 +155,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300002, guid: 41deed2f4f963124da5bc7ea4b22e476, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

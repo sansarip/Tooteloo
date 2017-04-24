@@ -18,6 +18,7 @@ public class UserInput
 		Block}
 
 	;
+	private GameObject[] audioClips;
 
 	private char[] keyList; 		// holds user input
 	private int keyListPosition;
@@ -28,12 +29,18 @@ public class UserInput
 	// constructor
 	public UserInput ()
 	{
+		audioClips = new GameObject[4];
+		audioClips [0] = GameObject.Find ("KeySoundQ");
+		audioClips [1] = GameObject.Find ("KeySoundW");
+		audioClips [2] = GameObject.Find ("KeySoundE");
+		audioClips [3] = GameObject.Find ("KeySoundR");
 		numCombos = 4;
 		keyList = new char[numCombos];
 		keyListPosition = 0;
 		comboList = generateComboList ();
 		comboLength = 4;
 	}
+		
 
 	public void setComboList (string[] newComboList)
 	{
@@ -52,7 +59,7 @@ public class UserInput
 
 	private string[] generateComboList ()
 	{
-		return new string[4] { "qwer", "qqqq", "qwqw", "were" };
+		return new string[4] { "qwer", "qwrr", "qwqw", "qwee" }; // combos here
 	}
 
 	private void resetComboList ()
@@ -73,25 +80,29 @@ public class UserInput
 	public bool checkInputKey ()
 	{
 		if (Input.GetKeyUp ("q")) {
-			Debug.Log ("Q");
+			//Debug.Log ("Q");
+			playSound(0);
 			int index = keyListPosition;
 			keyList [index] = 'q';
 			keyListPosition++;
 			return true;
 		} else if (Input.GetKeyUp ("w")) {
-			Debug.Log ("W");
+			//Debug.Log ("W");
+			playSound(1);
 			int index = keyListPosition;
 			keyList [index] = 'w';
 			keyListPosition++;
 			return true;
 		} else if (Input.GetKeyUp ("e")) {
-			Debug.Log ("E");
+			//Debug.Log ("E");
+			playSound(2);
 			int index = keyListPosition;
 			keyList [index] = 'e';
 			keyListPosition++;
 			return true;
 		} else if (Input.GetKeyUp ("r")) {
-			Debug.Log ("R");
+			//Debug.Log ("R");
+			playSound(3);
 			int index = keyListPosition;
 			keyList [index] = 'r';
 			keyListPosition++;
@@ -102,6 +113,9 @@ public class UserInput
 		return false;
 	}
 
+	private void playSound(int index) {
+		audioClips [index].GetComponent<AudioSource> ().Play();
+	}
 	/*
 	 * compareEquals compares a char array with a string
 	 * returns true if equal, else false
