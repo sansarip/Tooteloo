@@ -28,10 +28,10 @@ public class EnemyController : MonoBehaviour {
 	private float timeKnockedBack;
 	private float timeKnockedBackLimit;
 	private bool didOnce;
-	private bool move;
-	private bool target;
-	private bool moveAway;
-	private bool moveTo;
+	public  bool move;
+	public 	bool target;
+	public 	bool moveAway;
+	public  bool moveTo;
 	private bool takenDamage;
 	private bool arrivedTo;
 	private bool knockedBack;

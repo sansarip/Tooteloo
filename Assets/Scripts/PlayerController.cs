@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 	public float speed;
 	public float range;
 	public int health;
+	public bool testing;
 	private AudioSource walkResponse;
 	private AudioSource attackResponse;
 	private AudioSource blockResponse;
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
 	private bool inputTimerStarted;
 	private bool executingCombo;
 	private bool takenDamage;
+	private bool noSound;
 
 	void Awake() {
 		index = 0;
@@ -44,11 +46,16 @@ public class PlayerController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		walkResponse = GameObject.Find ("WalkSoundResponse").GetComponent<AudioSource>();
-		attackResponse = GameObject.Find ("AttackSoundResponse").GetComponent<AudioSource>();
-		blockResponse = GameObject.Find ("BlockSoundResponse").GetComponent<AudioSource>();
-		jumpResponse = GameObject.Find ("JumpSoundResponse").GetComponent<AudioSource>();
-		hurtResonse = GameObject.Find ("HurtSoundResponse").GetComponent<AudioSource>();
+		try {
+			walkResponse = GameObject.Find ("WalkSoundResponse").GetComponent<AudioSource>();
+			attackResponse = GameObject.Find ("AttackSoundResponse").GetComponent<AudioSource>();
+			blockResponse = GameObject.Find ("BlockSoundResponse").GetComponent<AudioSource>();
+			jumpResponse = GameObject.Find ("JumpSoundResponse").GetComponent<AudioSource>();
+			hurtResonse = GameObject.Find ("HurtSoundResponse").GetComponent<AudioSource>();
+			noSound = false;
+		} catch (MissingReferenceException e ) {
+			noSound = true;
+		}
 		comboMatch = UserInput.ActionName.None;
 		keyText = (Text)GameObject.Find ("KeyText").GetComponent<Text> ();
 		defaultKeyText = "Combo: ";
@@ -100,7 +107,9 @@ public class PlayerController : MonoBehaviour
 			timeDamaged = 0;
 			health -= damage;
 			gameObject.GetComponent<SpriteRenderer> ().color = new Color (0.75f, 0.75f, 0.75f, 0.85f);
-			hurtResonse.Play ();
+			if (!noSound) {
+				hurtResonse.Play ();
+			}
 		}
 	}
 
@@ -275,7 +284,9 @@ public class PlayerController : MonoBehaviour
 	 * call this before destroying object to keep from crashing when calculating camera position
 	 */
 	void setInactive() {
-		PlayerManager.activeObjects [index] = false;
+		if (!testing) {
+			PlayerManager.activeObjects [index] = false;
+		}
 	}
 
 	void displayKeyList ()
